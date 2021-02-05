@@ -8,10 +8,12 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default new Vuex.Store({
   state: {
-
+    events:[]
   },
   mutations: {
-
+    setEvent(state,payload){
+      state.events = payload;
+    }
   },
   actions: {
     storeEvents(state,payload) {
@@ -24,10 +26,11 @@ export default new Vuex.Store({
           });
       })
     },
-    getEvents(state) {
+    setEvents({commit}) {
       return new Promise((resolve, reject) => {
         axios.get('/api/event')
           .then(result => {
+            commit('setEvent',result.data);
             resolve(result.data);
           }).catch(error => {
             reject(error);
@@ -35,5 +38,7 @@ export default new Vuex.Store({
       })
     }
   },
-  getters: {}
+  getters: {
+    getEvents: state => state.events,
+  }
 });

@@ -168,22 +168,24 @@ export default {
           if (res.status == "success") {
             this.$toast.success(res.message);
           }
-          this.getEvent();
+          this.setEvent();
         })
         .catch((error) => {
           this.$toast.error("Something went wrong");
         });
     },
-    getEvent:function(){
+    setEvent: function () {
       this.$store
-        .dispatch("getEvents")
+        .dispatch("setEvents")
         .then((res) => {
-          console.log(res)
+          if (res.status == "success") {
+            this.$toast.success(res.message);
+          }
         })
         .catch((error) => {
           this.$toast.error("Something went wrong");
         });
-    }
+    },
   },
 };
 </script>

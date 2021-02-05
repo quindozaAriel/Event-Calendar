@@ -13,13 +13,13 @@
         "axios": "^0.21.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
         "bootstrap": "^4.6.0",
         "bootstrap-vue": "^2.21.2",
+        "v-calendar": "^2.2.3",
         "vue": "^2.6.12",
         "vue-toastification": "^1.7.11",
         "vuex": "^3.6.2"
