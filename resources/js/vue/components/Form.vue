@@ -96,10 +96,6 @@ export default {
     };
   },
   methods: {
-    submitForm: function () {
-      var formData = new FormData(document.getElementById("form-area"));
-      console.log(formData);
-    },
     checkForm: function () {
       let ret = true;
       if (this.event.value == "") {
@@ -157,6 +153,10 @@ export default {
       if (ret === true) {
         this.submitForm();
       }
+    },
+    submitForm: function () {
+      var formData = new FormData(document.getElementById("form-area"));
+      console.log(formData);
     },
   },
 };

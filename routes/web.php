@@ -17,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// /* POST METHOD FOR EVENT */
+// Route::post('/event/store', [App\Http\Controllers\EventsController::class, 'store']);
+
+/* VUE Routes */
 Route::get('/{any?}', App\Http\Controllers\PagesController::class);
