@@ -1,54 +1,164 @@
 <template>
   <div class="form__area">
-    <form method="post">
+    <b-form id="form-area" @submit.prevent="checkForm" method="post">
       <div class="">
-        <label>Employee Number</label>
+        <label>Event</label>
         <b-form-textarea
           id="textarea"
-          placeholder="Enter something..."
+          placeholder="Enter event.."
           rows="3"
+          name="event_details"
+          v-model="event.value"
+          :state="event.state"
         ></b-form-textarea>
+        <b-form-invalid-feedback>
+          {{ event.validation }}
+        </b-form-invalid-feedback>
       </div>
       <div class="">
         <label>Date From</label>
-        <b-form-datepicker class="mb-2" v-model="dateFrom"></b-form-datepicker>
-        {{dateFrom}}
+        <b-form-datepicker
+          class="mb-2"
+          v-model="dateFrom.value"
+          name="date_from"
+          :state="dateFrom.state"
+        ></b-form-datepicker>
+        <b-form-invalid-feedback>
+          {{ dateFrom.validation }}
+        </b-form-invalid-feedback>
       </div>
       <div class="">
         <label>Date To</label>
-        <b-form-datepicker class="mb-2" v-model="dateTo"></b-form-datepicker>
-        {{dateTo}}
+        <b-form-datepicker
+          class="mb-2"
+          v-model="dateTo.value"
+          name="date_to"
+          :state="dateTo.state"
+        ></b-form-datepicker>
+        <b-form-invalid-feedback>
+          {{ dateTo.validation }}
+        </b-form-invalid-feedback>
       </div>
       <div>
         <b-form-checkbox-group
-          id="checkbox-group-2"
-          v-model="selected"
-          :aria-describedby="ariaDescribedby"
-          name="flavour-2"
+          v-model="days.value"
+          :options="options"
+          name="days"
+          :state="days.state"
         >
-          <b-form-checkbox value="orange">Monday</b-form-checkbox>
-          <b-form-checkbox value="apple">Tuesday</b-form-checkbox>
-          <b-form-checkbox value="pineapple">Wednesday</b-form-checkbox>
-          <b-form-checkbox value="grape">Thursday</b-form-checkbox>
-          <b-form-checkbox value="grape">Friday</b-form-checkbox>
-          <b-form-checkbox value="grape">Saturday</b-form-checkbox>
-          <b-form-checkbox value="grape">Sunday</b-form-checkbox>
         </b-form-checkbox-group>
+        <b-form-invalid-feedback :state="days.state">{{
+          days.validation
+        }}</b-form-invalid-feedback>
       </div>
       <b-button variant="primary" type="submit">Save</b-button>
-    </form>
+    </b-form>
   </div>
 </template>
 
 <script>
 export default {
   name: "Form",
-  data(){
-    return{
-      dateFrom:'',
-      dateTo:'',
-    }
-  }
+  data() {
+    return {
+      event: {
+        value: "",
+        state: null,
+        validation: "",
+      },
+
+      dateTo: {
+        value: "",
+        state: null,
+        validation: "",
+      },
+
+      dateFrom: {
+        value: "",
+        state: null,
+        validation: "",
+      },
+
+      days: {
+        value: [],
+        state: null,
+        validation: "",
+      },
+      options: [
+        { text: "Monday", value: "1" },
+        { text: "Tuesday", value: "2" },
+        { text: "Wednesday", value: "3" },
+        { text: "Thursday", value: "4" },
+        { text: "Friday", value: "5" },
+        { text: "Saturday", value: "6" },
+        { text: "Sunday", value: "0" },
+      ],
+    };
+  },
+  methods: {
+    submitForm: function () {
+      var formData = new FormData(document.getElementById("form-area"));
+      console.log(formData);
+    },
+    checkForm: function () {
+      let ret = true;
+      if (this.event.value == "") {
+        this.event.state = false;
+        this.event.validation = "Please input some details";
+        ret = false;
+      } else {
+        this.event.state = null;
+        this.event.validation = "";
+      }
+
+      if (this.dateFrom.value == "") {
+        this.dateFrom.state = false;
+        this.dateFrom.validation = "Please select date";
+        ret = false;
+      } else {
+        var newDateFrom = new Date(this.dateFrom.value);
+        var newDateTo = new Date(this.dateTo.value);
+
+        if (newDateFrom > newDateTo) {
+          this.dateFrom.state = false;
+          this.dateFrom.validation = "Please select valid date";
+        } else {
+          this.dateFrom.state = null;
+          this.dateFrom.validation = "";
+        }
+      }
+
+      if (this.dateTo.value == "") {
+        this.dateTo.state = false;
+        this.dateTo.validation = "Please select date";
+        ret = false;
+      } else {
+        var newDateFrom = new Date(this.dateFrom.value);
+        var newDateTo = new Date(this.dateTo.value);
+
+        if (newDateFrom > newDateTo) {
+          this.dateTo.state = false;
+          this.dateTo.validation = "Please select valid date";
+        } else {
+          this.dateTo.state = null;
+          this.dateTo.validation = "";
+        }
+      }
+
+      if (this.days.value.length == 0) {
+        this.days.state = false;
+        this.days.validation = "Please select day";
+        ret = false;
+      } else {
+        this.days.state = null;
+        this.days.validation = "";
+      }
+
+      if (ret === true) {
+        this.submitForm();
+      }
+    },
+  },
 };
 </script>
 
