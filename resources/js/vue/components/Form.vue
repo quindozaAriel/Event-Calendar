@@ -51,7 +51,7 @@
           days.validation
         }}</b-form-invalid-feedback>
       </div>
-      <b-button variant="primary" type="submit">Save</b-button>
+      <center><b-button variant="info" type="submit" class="mt-5 w-50">Save</b-button></center>
     </b-form>
   </div>
 </template>

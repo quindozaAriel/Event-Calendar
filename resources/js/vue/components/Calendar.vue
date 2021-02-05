@@ -7,6 +7,7 @@
       :attributes="getEvents"
     >
     </v-calendar>
+    <label class="calendar__label">Hover to see events!</label>
   </div>
 </template>
 
@@ -22,8 +23,11 @@ export default {
   computed: {
     getEvents() {
       var event_data = this.$store.getters.getEvents;
-      if (event_data) {
-        var attributes = [];
+      if (event_data.length == 0) {
+      
+      }
+      else{
+          var attributes = [];
         Object.keys(event_data.result).forEach(function (key) {
           let attr_obj = {
             key: event_data.result[key]["id"],
@@ -55,4 +59,8 @@ export default {
 };
 </script>
 <style>
+.calendar__label{
+  color:#6c7475;
+  font-style: italic;
+}
 </style>
