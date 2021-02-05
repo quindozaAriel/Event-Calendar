@@ -21,6 +21,7 @@
         "bootstrap": "^4.6.0",
         "bootstrap-vue": "^2.21.2",
         "vue": "^2.6.12",
+        "vue-toastification": "^1.7.11",
         "vuex": "^3.6.2"
     }
 }

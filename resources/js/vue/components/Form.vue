@@ -156,7 +156,14 @@ export default {
     },
     submitForm: function () {
       var formData = new FormData(document.getElementById("form-area"));
-      console.log(formData);
+      this.$store
+        .dispatch("storeEvents",formData)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          this.$toast.error('Something went wrong');
+        });
     },
   },
 };
