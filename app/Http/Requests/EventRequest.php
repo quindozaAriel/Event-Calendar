@@ -24,7 +24,10 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'description'   => 'required',
+            'dateTo'        => 'required|date',
+            'dateFrom'      => 'required|date',
+            'days'          => 'required',
         ];
     }
 }

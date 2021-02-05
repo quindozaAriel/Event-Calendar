@@ -7,7 +7,7 @@
           id="textarea"
           placeholder="Enter event.."
           rows="3"
-          name="event_details"
+          name="description"
           v-model="event.value"
           :state="event.state"
         ></b-form-textarea>
