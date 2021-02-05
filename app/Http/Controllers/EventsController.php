@@ -19,7 +19,6 @@ class EventsController extends Controller
      */
     public function store(EventRequest $request)
     {
-
         try {
             $data = $request->validated();
 
@@ -55,6 +54,10 @@ class EventsController extends Controller
      */
     public function show(Events $events)
     {
-        //
+        try {
+            return $this->success('Events Loaded', 200, $events->all());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage(), 500);
+        }
     }
 }

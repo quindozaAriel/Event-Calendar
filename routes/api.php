@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 /* POST METHOD FOR EVENT */
+Route::get('/event', [App\Http\Controllers\EventsController::class, 'show']);
 Route::post('/event', [App\Http\Controllers\EventsController::class, 'store']);

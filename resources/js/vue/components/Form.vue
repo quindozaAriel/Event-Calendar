@@ -155,24 +155,35 @@ export default {
       }
     },
     submitForm: function () {
-      // var formData = new FormData(document.getElementById("form-area"));
-
       var formData = {
-        description:this.event.value,
-        date_from:this.dateFrom.value,
-        date_to:this.dateTo.value,
-        days:this.days.value,
-      }
+        description: this.event.value,
+        date_from: this.dateFrom.value,
+        date_to: this.dateTo.value,
+        days: this.days.value,
+      };
 
       this.$store
         .dispatch("storeEvents", formData)
         .then((res) => {
-          console.log(res);
+          if (res.status == "success") {
+            this.$toast.success(res.message);
+          }
+          this.getEvent();
         })
         .catch((error) => {
           this.$toast.error("Something went wrong");
         });
     },
+    getEvent:function(){
+      this.$store
+        .dispatch("getEvents")
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          this.$toast.error("Something went wrong");
+        });
+    }
   },
 };
 </script>

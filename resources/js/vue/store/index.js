@@ -7,7 +7,9 @@ Vue.use(Vuex);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+
+  },
   mutations: {
 
   },
@@ -16,7 +18,17 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post('/api/event',payload)
           .then(result => {
-            resolve(result);
+            resolve(result.data);
+          }).catch(error => {
+            reject(error);
+          });
+      })
+    },
+    getEvents(state) {
+      return new Promise((resolve, reject) => {
+        axios.get('/api/event')
+          .then(result => {
+            resolve(result.data);
           }).catch(error => {
             reject(error);
           });
