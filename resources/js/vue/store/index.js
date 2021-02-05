@@ -16,7 +16,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post('/api/event',payload)
           .then(result => {
-            // commit('CREATE_POST', res.data)
             resolve(result);
           }).catch(error => {
             reject(error);

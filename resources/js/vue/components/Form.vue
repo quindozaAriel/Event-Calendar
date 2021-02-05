@@ -85,13 +85,13 @@ export default {
         validation: "",
       },
       options: [
-        { text: "Monday", value: "1" },
-        { text: "Tuesday", value: "2" },
-        { text: "Wednesday", value: "3" },
-        { text: "Thursday", value: "4" },
-        { text: "Friday", value: "5" },
-        { text: "Saturday", value: "6" },
-        { text: "Sunday", value: "0" },
+        { text: "Monday", value: "Mon" },
+        { text: "Tuesday", value: "Tue" },
+        { text: "Wednesday", value: "Wed" },
+        { text: "Thursday", value: "Thu" },
+        { text: "Friday", value: "Fri" },
+        { text: "Saturday", value: "Sat" },
+        { text: "Sunday", value: "Sun" },
       ],
     };
   },
@@ -155,14 +155,22 @@ export default {
       }
     },
     submitForm: function () {
-      var formData = new FormData(document.getElementById("form-area"));
+      // var formData = new FormData(document.getElementById("form-area"));
+
+      var formData = {
+        description:this.event.value,
+        date_from:this.dateFrom.value,
+        date_to:this.dateTo.value,
+        days:this.days.value,
+      }
+
       this.$store
-        .dispatch("storeEvents",formData)
+        .dispatch("storeEvents", formData)
         .then((res) => {
           console.log(res);
         })
         .catch((error) => {
-          this.$toast.error('Something went wrong');
+          this.$toast.error("Something went wrong");
         });
     },
   },
